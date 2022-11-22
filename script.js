@@ -157,6 +157,8 @@ function validateCharacterTypes(array)
   {
       if (typesArray[i].include == true)
       {
+        document.querySelector("#validateCharacterTypes").style.color = "green";
+        document.querySelector("#validateCharacterTypes").innerHTML = "Valid selection of character types";
         return true;
       }
   }
@@ -183,6 +185,8 @@ function generatePassword()
     return el.include == true;
   });
 
+  var password = "";
+
   console.log(chosenArrays);
 
 for (var i = 0; i < pwordlength;i++)
@@ -190,7 +194,7 @@ for (var i = 0; i < pwordlength;i++)
   var random_number = getRandomInt(0, chosenArrays.length-1);
   characterArray = chosenArrays[random_number].array;
   var randomChar = getRandom(characterArray);
-  console.log(randomChar);
+  var password = password + randomChar;
 }
 return password;
 }
@@ -199,10 +203,12 @@ return password;
 var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
-function writePassword() {
+function writePassword() 
+{
   getPasswordOptions();
   validatePwordLength(pwordlength);
   validateCharacterTypes(typesArray);
+
   if(validatePwordLength(pwordlength) && validateCharacterTypes(typesArray))
   {
   var password = generatePassword();
