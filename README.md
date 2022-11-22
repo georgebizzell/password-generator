@@ -30,4 +30,4 @@ Please take, improve, adapt in any way.
 
 3. Security concerns
 
-![Screenshot](..\password-generator\2022-11-22_17h11_32.png)
+![Screenshot](2022-11-22_17h11_32.png)
