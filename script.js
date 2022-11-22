@@ -90,7 +90,21 @@ var upperCasedCharacters = [
 
 console.clear();
 
-var typesArray = [];
+function characterArray(array, id, include) {
+  this.array = array;
+  this.id = id;
+  this.include = include;
+}
+
+const lowerCasedCharactersObj = new characterArray(lowerCasedCharacters, "#lowercase", false);
+const upperCasedCharactersObj = new characterArray(upperCasedCharacters, "#uppercase", false);
+const numericCharactersObj = new characterArray(numericCharacters, "#numeric", false);
+const specialCharactersObj = new characterArray(specialCharacters, "#specialCharacters", false);
+
+
+const typesArray = [lowerCasedCharactersObj, upperCasedCharactersObj, numericCharactersObj, specialCharactersObj];
+
+var optionsFilter = [];
 
 var pwordlength = 0;
 
@@ -105,17 +119,12 @@ function getRandomInt(min, max) {
 function getPasswordOptions() {
 
   var pwordlength = document.querySelector("#pwordlength").value;
-  const lowercase = document.querySelector("#lowercase");
-  const uppercase = document.querySelector("#uppercase");
-  const numeric = document.querySelector("#numeric");
-  const special = document.querySelector("#specialCharacters"); 
-
-  ArrayOption = {
-    array: 'lowerCasedCharacters',
-    use: document.querySelector("#lowercase").checked
+  
+  typesArray.forEach(function (item , index) 
+  {
+   item.include = document.querySelector(item.id).checked;
   }
-
-  typesArray.push(ArrayOption);
+  )
 
   console.log(typesArray);
 
