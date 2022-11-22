@@ -4,7 +4,7 @@ Password generator using javascript, HTML & CSS
 
 ## Links
 
-URL: To be added once live
+Website URL: https://georgebizzell.github.io/password-generator/
 
 Github repo: https://github.com/georgebizzell/password-generator
 
