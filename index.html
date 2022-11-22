@@ -25,10 +25,13 @@
           ></textarea>
         </div>
         <div>
-            <p> Length of password (10 - 64) <input type="text" id="pwordlength"> </p> 
+            <h4> Length of password (10 - 64 characters) </h4>
             
-            <p name="pwordlengthvalidation"> Password Length </p>
+            <input type="text" id="pwordlength">  
+            
+            <p class=validation id="pwordlengthvalidation"> </p>
 
+            <h4> Character types </h4>
             
             <label for="Lowercase"> 
               <input type="checkbox" id="lowercase" name="lowercase"> Lowercase 
@@ -46,6 +49,8 @@
             <label for="Special characters"> 
               <input type="checkbox" id="specialCharacters" name="specialCharacters"> Special characters 
             </label> <br>
+
+            <p class=validation id="validateCharacterTypes"> </p>
         
           </div>
         <div class="card-footer">

@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+.validation
+{
+  color: red;
+  font-size: 0.8rem;
+}
+
 html,
 body,
 .wrapper {

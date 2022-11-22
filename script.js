@@ -104,7 +104,7 @@ const specialCharactersObj = new characterArray(specialCharacters, "#specialChar
 
 const typesArray = [lowerCasedCharactersObj, upperCasedCharactersObj, numericCharactersObj, specialCharactersObj];
 
-var optionsFilter = [];
+var optionsFiltered = [];
 
 var pwordlength = 0;
 
@@ -118,9 +118,7 @@ function getRandomInt(min, max) {
 // Function to prompt user for password options
 function getPasswordOptions() {
 
-  var pwordlength = document.querySelector("#pwordlength").value;
-  
-  typesArray.forEach(function (item , index) 
+  typesArray.forEach(function (item) 
   {
    item.include = document.querySelector(item.id).checked;
   }
@@ -128,53 +126,73 @@ function getPasswordOptions() {
 
   console.log(typesArray);
 
-  /*upperCasedCharacters
-  numericCharacters
-  specialCharacters */
+  pwordlength = document.querySelector("#pwordlength").value;
 
   console.log(pwordlength);
-  console.log(lowercase.checked);
-  console.log(uppercase.checked);
-  console.log(numeric.checked);
-  console.log(special.checked);
-}
-
-//Filter arrays by options
-/*
-function filterArrays
-{
 
 }
-*/
+
 
 // Validate password length entry
 function validatePwordLength(pwordlength) {
   if (pwordlength > 9 && pwordlength < 65)
   {
-    document.getElementsByName("pwordlengthvalidation") = "Valid length";
+    document.querySelector("#pwordlengthvalidation").style.color = "green";
+    document.querySelector("#pwordlengthvalidation").innerHTML = "Valid password length";
+    return true;
   }
   else
   {
-    document.getElementsByName("pwordlengthvalidation") = "Incorrect entry - Password length must be between 10 - 65 characters";
+    document.querySelector("#pwordlengthvalidation").style.color = "red";
+    document.querySelector("#pwordlengthvalidation").innerHTML = "Password length must be between 10 - 64 characters";
+    return false;
   }
 }
 
+// Check at least one character type selected
+function validateCharacterTypes(array)
+{
+
+  for (var i = 0; i < typesArray.length; i++)
+  {
+      if (typesArray[i].include == true)
+      {
+        return true;
+      }
+  }
+  
+  document.querySelector("#validateCharacterTypes").style.color = "red";
+  document.querySelector("#validateCharacterTypes").innerHTML = "At least 1 character type must be selected";
+
+  return false;
+
+}
 
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  var random_number = getRandomInt(0, arr.length);
+  var random_number = getRandomInt(0, arr.length-1);
   return arr[random_number];
 }
 
-console.log(getRandom(upperCasedCharacters));
 
 // Function to generate password with user input
-function generatePassword() {
-for (var i; i < pwordlength;i++)
+function generatePassword() 
 {
-  console.log("generatePasswordCalled");
+  var chosenArrays = typesArray.filter(function (el) {
+    return el.include == true;
+  });
+
+  console.log(chosenArrays);
+
+for (var i = 0; i < pwordlength;i++)
+{
+  var random_number = getRandomInt(0, chosenArrays.length-1);
+  characterArray = chosenArrays[random_number].array;
+  var randomChar = getRandom(characterArray);
+  console.log(randomChar);
 }
+return password;
 }
 
 // Get references to the #generate element
@@ -182,14 +200,19 @@ var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
-
   getPasswordOptions();
   validatePwordLength(pwordlength);
+  validateCharacterTypes(typesArray);
+  if(validatePwordLength(pwordlength) && validateCharacterTypes(typesArray))
+  {
   var password = generatePassword();
   var passwordText = document.querySelector('#password'); 
-
   passwordText.value = password;
-
+  }
+  else
+  {
+    stop;
+  }
 }
 
 // Add event listener to generate button
